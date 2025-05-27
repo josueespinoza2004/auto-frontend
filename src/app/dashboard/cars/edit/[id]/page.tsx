@@ -1,11 +1,8 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import CarFormEdit from "@/components/cars/cars-form-edit";
+import CarForm from "@/components/cars/car-form";
 
-
-async function EditCarPage({ params }: Props) {
-  console.log(params) // Log the car ID to the console for debugging
-  const cars= await getCarById(params.id); // Assuming getCarById is defined elsewhere
+export default function EditCarPage({ params }: { params: { id: string } }) {
   return (
     <div className="h-screen flex justify-center items-center">
       <Card>
@@ -13,10 +10,9 @@ async function EditCarPage({ params }: Props) {
           <CardTitle>Editar Carro</CardTitle>
         </CardHeader>
         <CardContent>
-          <CarFormEdit cars={cars} />
+          <CarForm carId={params.id} />
         </CardContent>
       </Card>
     </div>
   );
 }
-export default EditCarPage;

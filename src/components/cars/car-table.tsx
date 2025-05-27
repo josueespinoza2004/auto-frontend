@@ -39,29 +39,22 @@ export function CarTable() {
   };
 
   async function handleDelete(id: string) {
-  try {
-    const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este carro?");
-    if (!confirmDelete) return;
+    try {
+      const confirmDelete = confirm("¿Estás seguro de que deseas eliminar este carro?");
+      if (!confirmDelete) return;
 
-    // Llama a la API para eliminar el carro
-    await deleteCar(id);
-
-    // Muestra un mensaje de éxito
-    alert("Marca eliminada correctamente");
-
-    // Recarga los datos de la tabla
-    loadCars(offset);
-  } catch (error) {
-    console.error("Error al eliminar el carro:", error);
-    alert("Hubo un error al intentar eliminar la marca.");
+      await deleteCar(id);
+      alert("Carro eliminado correctamente");
+      loadCars(offset);
+    } catch (error) {
+      console.error("Error al eliminar el carro:", error);
+      alert("Hubo un error al intentar eliminar el carro.");
+    }
   }
-}
 
   useEffect(() => {
     loadCars(0);
   }, []);
-
-
 
   return (
     <div className="space-y-4">
@@ -94,14 +87,14 @@ export function CarTable() {
                 <TableCell className="text-right">
                   <div className="flex gap-2 justify-end">
                     <Button
-                      //   variant="outline"
                       size="sm"
-                      className="bg-blue-600 text-white :hover:bg-blue-700"
+                      className="bg-blue-600 text-white hover:bg-blue-700"
+                      onClick={() => router.push(`/dashboard/cars/edit/${car.id}`)}
                     >
                       <BiPencil className="h-4 w-4" /> Editar
                     </Button>
-                    <Button onClick={() => handleDelete(car.id)}
-                      //   variant="destructive"
+                    <Button
+                      onClick={() => handleDelete(car.id)}
                       size="sm"
                       className="bg-destructive text-destructive-foreground"
                     >
